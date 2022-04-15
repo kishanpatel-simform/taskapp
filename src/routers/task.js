@@ -9,6 +9,7 @@ router.post('/tasks', auth, async(req, res) => {
     })
     try {
         await tasks.save()
+        console.log("Message " + req.t('task_create_success'))
         res.status(201).send(tasks)
     } catch (e) {
         res.status(400).send(e)
@@ -66,6 +67,7 @@ router.patch('/tasks/:id', auth, async(req, res) => {
             task[update] = req.body[update]
         })
         await task.save()
+        console.log("Message " + req.t('task_update_success'))
             // const tasks = await Task.findByIdAndUpdate(_id, req.body, { new: true, runValidators: true })
         if (!task) {
             return res.status(500).send()
@@ -84,6 +86,7 @@ router.delete('/tasks/:id', async(req, res) => {
         if (!tasks) {
             return res.status(500).send()
         }
+        console.log("Message " + req.t('task_delete_success'))
         res.status(200).send(tasks)
     } catch (e) {
         res.status(500).send(e)

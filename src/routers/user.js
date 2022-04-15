@@ -9,12 +9,17 @@ const router = new express.Router()
 router.post('/users', async(req, res) => {
     const user = new User(req.body)
     try {
+
         await user.save()
         console.log(sendWelcomeEmail(user.email, user.name))
         const token = await user.generateAuthToken()
+        console.log("Message " + req.t('user_create_success'))
+
         res.status(201).send({ user, token })
     } catch (e) {
+
         res.status(400).send(e)
+
     }
 })
 
@@ -26,6 +31,7 @@ router.post('/users/login', async(req, res) => {
             user,
             token
         })
+        console.log("Message " + req.t('user_login_success'))
     } catch (e) {
         res.status(400).send(e)
     }
@@ -100,6 +106,8 @@ router.get('/users/logout', auth, async(req, res) => {
             return token.token !== req.token
         })
         await req.user.save()
+        console.log("Message " + req.t('user_logout_success'))
+
         res.status(200).send()
 
     } catch (e) {
@@ -147,6 +155,7 @@ router.patch('/users/:id', auth, async(req, res) => {
 
         })
         await req.user.save()
+        console.log("Message " + req.t('user_update_success'))
             //const users = await User.findByIdAndUpdate(_id, req.body, { new: true, runValidators: true })
             // if (!users) {
             //     return res.status(500).send()
@@ -165,6 +174,7 @@ router.delete('/users/me', auth, async(req, res) => {
         // }
         // res.status(200).send(users)
         await req.user.remove()
+        console.log("Message " + req.t('user_delete_success'))
         sendCancellationEmail(req.user.email, req.user.name)
         res.status(200).send(req.user)
     } catch (e) {

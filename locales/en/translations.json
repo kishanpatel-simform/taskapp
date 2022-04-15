@@ -1,0 +1,10 @@
+{
+    "user_create_success": "User Created",
+    "user_login_success": "User Login Success",
+    "user_logout_success": "User LogOut Success",
+    "user_update_success": "User Update Success",
+    "user_delete_success": "User Delete Success",
+    "task_create_success": "Task Created",
+    "task_update_success": "Task Updated Success",
+    "task_delete_success": "Task Delete Success"
+}

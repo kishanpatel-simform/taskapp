@@ -5,14 +5,24 @@ const Task = require('./models/task')
 const userRouter = require('./routers/user')
 const taskRouter = require('./routers/task')
 const dotenv = require('dotenv')
+const i18next = require('i18next')
+const backend = require('i18next-fs-backend')
+const middleware = require('i18next-http-middleware')
 dotenv.config()
 
 
 const app = express()
 const port = process.env.PORT
 
-
-
+//middlewares declaration for i18
+i18next.use(backend).use(middleware.LanguageDetector)
+    .init({
+        fallbackLng: 'en',
+        backend: {
+            loadPath: './locales/{{lng}}/translations.json'
+        }
+    })
+app.use(middleware.handle(i18next))
 app.use(express.json())
 app.use(userRouter)
 app.use(taskRouter)

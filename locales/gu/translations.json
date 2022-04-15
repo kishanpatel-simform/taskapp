@@ -1,0 +1,10 @@
+{
+    "user_create_success": "વપરાશકર્તા બનાવેલ",
+    "user_login_success": "વપરાશકર્તા લૉગિન સફળતા",
+    "user_logout_success": "વપરાશકર્તા લોગઆઉટ સફળતા",
+    "user_update_success": "વપરાશકર્તા અપડેટ સફળતા",
+    "user_delete_success": "વપરાશકર્તા કાઢી નાખવામાં સફળતા",
+    "task_create_success": "કાર્ય બનાવ્યું",
+    "task_update_success": "કાર્ય અપડેટ કરેલ સફળતા",
+    "task_delete_success": "કાર્ય કાઢી નાખવાની સફળતા"
+}
