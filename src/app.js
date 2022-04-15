@@ -8,11 +8,27 @@ const dotenv = require('dotenv')
 const i18next = require('i18next')
 const backend = require('i18next-fs-backend')
 const middleware = require('i18next-http-middleware')
+const helmet = require("helmet");
 dotenv.config()
 
 
 const app = express()
+
 const port = process.env.PORT
+app.use(helmet());
+app.use(express.json());
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    if (req.method === "OPTIONS") {
+        res.header("Access-Control-Allow-Methods", "GET,PUT,PATCH,POST,DELETE");
+        return res.status(200).json({});
+    }
+    next();
+});
 
 //middlewares declaration for i18
 i18next.use(backend).use(middleware.LanguageDetector)
